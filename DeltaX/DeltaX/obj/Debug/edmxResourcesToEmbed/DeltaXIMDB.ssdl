@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DeltaXIMDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Actor_Movie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActorId" Type="int" />
+    <Property Name="MovieId" Type="int" />
+  </EntityType>
+  <EntityType Name="Actors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Sex" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="Bio" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="YearofRelease" Type="date" Nullable="false" />
+    <Property Name="Plot" Type="varchar" MaxLength="255" />
+    <Property Name="Poster" Type="varbinary(max)" />
+    <Property Name="ProducerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Producers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Sex" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="Bio" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Actor_Mov__Actor__36B12243">
+    <End Role="Actors" Type="Self.Actors" Multiplicity="0..1" />
+    <End Role="Actor_Movie" Type="Self.Actor_Movie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Actor_Movie">
+        <PropertyRef Name="ActorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Actor_Mov__Movie__37A5467C">
+    <End Role="Movie" Type="Self.Movie" Multiplicity="0..1" />
+    <End Role="Actor_Movie" Type="Self.Actor_Movie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Actor_Movie">
+        <PropertyRef Name="MovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_ProducerId">
+    <End Role="Producers" Type="Self.Producers" Multiplicity="1" />
+    <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movie">
+        <PropertyRef Name="ProducerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DeltaXIMDBModelStoreContainer">
+    <EntitySet Name="Actor_Movie" EntityType="Self.Actor_Movie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Actors" EntityType="Self.Actors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producers" EntityType="Self.Producers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Actor_Mov__Actor__36B12243" Association="Self.FK__Actor_Mov__Actor__36B12243">
+      <End Role="Actors" EntitySet="Actors" />
+      <End Role="Actor_Movie" EntitySet="Actor_Movie" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Actor_Mov__Movie__37A5467C" Association="Self.FK__Actor_Mov__Movie__37A5467C">
+      <End Role="Movie" EntitySet="Movie" />
+      <End Role="Actor_Movie" EntitySet="Actor_Movie" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_ProducerId" Association="Self.FK_Movie_ProducerId">
+      <End Role="Producers" EntitySet="Producers" />
+      <End Role="Movie" EntitySet="Movie" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

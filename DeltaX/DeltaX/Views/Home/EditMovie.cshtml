@@ -1,0 +1,78 @@
+﻿@model DeltaX.Models.MoviesViewModel
+
+@{
+    ViewBag.Title = "EditMovie";
+}
+
+<div id="divEditMovieMain">
+    <div id="ddivEditMovieModal" class="modal fade in" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="fa fa-times-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group" id="divMdForm">
+                            @* todo: we don't it for update operation *@
+                            @*<label id="" class="text-important-bold"> Producer: </label>
+
+                            @Html.DropDownListFor(
+                                m => m.ProducerId,
+                                Enumerable.Empty<SelectListItem>(),
+                                "<---Select--->",
+                                new
+                                {
+                                    @id = "producerId",
+                                    @class = "form-control no-border"
+                                })*@
+
+                            @Html.HiddenFor(
+                                m => m.Id,
+                                new
+                                {
+                                    @id = "moviePkId"
+                                })
+
+                            <hr class="visibility" id="ddlHr"/>
+                            <br/><label class="lblMd">Name</label>
+                            @Html.TextBoxFor(
+                                m => m.Name,
+                                new
+                                {
+                                    @class = "form-control no-border",
+                                    @placeholder = "Name",
+                                    @id = "movieName"
+                                })
+                            @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+
+                            <hr class="visibility" id="ddlHr"/>
+                            <br/><label class="lblMd">Plot</label>
+                            @Html.TextBoxFor(
+                                m => m.Plot,
+                                new
+                                {
+                                    @class = "form-control no-border",
+                                    @placeholder = "Description",
+                                    @id = "plotEditId"
+                                })
+                            @Html.ValidationMessageFor(model => model.Plot, "", new {@class = "text-danger"})
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <a class="btn btn-success" id="editMovieModal">Save</a>
+        </div>
+    </div>
+</div>
+

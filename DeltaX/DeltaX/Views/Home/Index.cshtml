@@ -1,0 +1,39 @@
+﻿
+@model List<DeltaX.Models.MoviesViewModel>
+
+@{
+    ViewBag.Title = "DeltaX IMDB";
+}
+
+ 
+<table class="table table-hover display" id="tblMovieGrid" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th class="col-md-1 nosort sorting_desc_disabled sorting_asc_disabled"
+            title="Row Context Menu To Perform Actions">Action</th>
+        <th class="col-md-1" style="display: none">PkMovieId</th>
+        <th class="col-md-2" title="Movie Name">Movie Name</th>
+        <th class="col-md-2" title="Year of Release">Year of Release</th>
+        <th class="col-md-2" title="Plot">Plot</th>
+        <th class="col-md-2" title="Producer Name">Producer Name</th>
+        <th class="col-md-2" title="Actor Name">Actor Name</th>
+    </tr>
+    </thead>
+    @foreach (var row in Model)
+    {
+        <tr>
+            <td><button type="button" class="btn btn-info btnEditMovie">Edit</button></td>
+            <td style="display: none" data-id="@row.Id">@row.Id</td>
+            <td>@row.Name</td>
+            <td>@row.YearofRelease</td>
+            <td>@row.Plot</td>
+            <td>@row.ProducerName</td>
+            @foreach(var actors in row.ActorName)
+            {
+                <td>@actors</td>
+            }
+            
+        </tr>
+    }
+    <tbody id="movieTableBody"></tbody>
+</table>
